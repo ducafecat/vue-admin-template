@@ -21,6 +21,14 @@ import Layout from '../views/layout/Layout'
 export const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login/index'), hidden: true },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
+  { path: '/mock', component: Layout, hidden: true,
+    children: [
+      {
+        path: 'api-list',
+        name: 'mock-api-list',
+        component: () => import('@/views/mock/api-list')
+      }]
+  },
 
   {
     path: '/',
@@ -32,6 +40,28 @@ export const constantRouterMap = [
       path: 'dashboard',
       component: () => import('@/views/dashboard/index')
     }]
+  },
+
+  {
+    path: '/mock',
+    component: Layout,
+    redirect: '/mock/index',
+    name: 'mock',
+    meta: { title: 'mock数据', icon: 'example' },
+    children: [
+      {
+        path: 'index',
+        name: 'mock-index',
+        component: () => import('@/views/mock/index'),
+        meta: { title: '全部项目', icon: 'table' }
+      },
+      {
+        path: 'add',
+        name: 'mock-add',
+        component: () => import('@/views/mock/add'),
+        meta: { title: '添加项目', icon: 'tree' }
+      }
+    ]
   },
 
   {
